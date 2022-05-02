@@ -1,11 +1,29 @@
 {
-  "name": "genomus-core",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+    "main": "lib/binding.js",
+    "dependencies": {
+        "libxmljs": "^0.19.7",
+        "node-addon-api": "^1.1.0"
+    },
+    "scripts": {
+        "pretest": "tsc",
+        "test": "node --napi-modules ./test/test_binding.js"
+    },
+    "gypfile": true,
+    "name": "genomus-core",
+    "version": "1.0.0",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mipdr/genomus-core-js.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/mipdr/genomus-core-js/issues"
+    },
+    "homepage": "https://github.com/mipdr/genomus-core-js#readme",
+    "description": "",
+    "devDependencies": {
+        "@types/node": "^7.0.22",
+        "typescript": "^2.3.3"
+    }
 }
