@@ -1,3 +1,4 @@
 -xc++
+-std=c++20
 --include-directory=/usr/include/nodejs/src
 --include-directory=./node_modules/node-addon-api/

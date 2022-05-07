@@ -1,1 +1,0 @@
-cmd_Debug/genomus_core_native.node := ln -f "Debug/obj.target/genomus_core_native.node" "Debug/genomus_core_native.node" 2>/dev/null || (rm -rf "Debug/genomus_core_native.node" && cp -af "Debug/obj.target/genomus_core_native.node" "Debug/genomus_core_native.node")

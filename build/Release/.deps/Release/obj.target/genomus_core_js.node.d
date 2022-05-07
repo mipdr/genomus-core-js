@@ -1,1 +1,0 @@
-cmd_Release/obj.target/genomus_core_js.node := g++ -o Release/obj.target/genomus_core_js.node -shared -pthread -rdynamic -m64  -Wl,-soname=genomus_core_js.node -Wl,--start-group Release/obj.target/genomus_core_js/src/genomus_napi.o Release/obj.target/node_modules/node-addon-api/src/nothing.a -Wl,--end-group 

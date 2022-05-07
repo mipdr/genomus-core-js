@@ -4,9 +4,8 @@
       'target_name': 'genomus_core_native',
       'sources': [ 
         'src/genomus_core_native.cpp'
-        # 'genomus-core/sample.cc',
-        # 'genomus-core/library/*',
-        # 'genomus-core/common/error_handling/*'
+        'src/genomus-core/library/**',
+        'src/genomus-core/common/error_handling/**'
       ],
       'include_dirs': ["<!@(node -p \"require('node-addon-api').include\")"],
       'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],

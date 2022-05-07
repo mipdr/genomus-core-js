@@ -1,1 +1,0 @@
-cmd_Debug/nothing.a := ln -f "Debug/obj.target/node_modules/node-addon-api/src/nothing.a" "Debug/nothing.a" 2>/dev/null || (rm -rf "Debug/nothing.a" && cp -af "Debug/obj.target/node_modules/node-addon-api/src/nothing.a" "Debug/nothing.a")
