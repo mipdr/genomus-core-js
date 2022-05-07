@@ -1,0 +1,9 @@
+Release/obj.target/genomus-core-native/src/genomus_napi.o: \
+ ../src/genomus_napi.cpp \
+ /home/miguel/TFG/genomus-core-js/node_modules/node-addon-api/napi.h \
+ /home/miguel/.cache/node-gyp/16.0.0/include/node/node_api.h \
+ /home/miguel/.cache/node-gyp/16.0.0/include/node/js_native_api.h \
+ /home/miguel/.cache/node-gyp/16.0.0/include/node/js_native_api_types.h \
+ /home/miguel/.cache/node-gyp/16.0.0/include/node/node_api_types.h \
+ /home/miguel/TFG/genomus-core-js/node_modules/node-addon-api/napi-inl.h \
+ /home/miguel/TFG/genomus-core-js/node_modules/node-addon-api/napi-inl.deprecated.h

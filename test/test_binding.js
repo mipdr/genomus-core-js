@@ -1,12 +1,11 @@
-const GenomusCore = require("../dist/binding.js");
+const gm = require("../dist/binding.js");
 const assert = require("assert");
 
-assert(GenomusCore, "The expected function is undefined");
+assert(gm, "The expected function is undefined");
 
 function testBasic()
 {
-    const result =  GenomusCore("hello");
-    assert.strictEqual(result, "world", "Unexpected value returned");
+    console.log(gm)
 }
 
 assert.doesNotThrow(testBasic, undefined, "testBasic threw an expection");

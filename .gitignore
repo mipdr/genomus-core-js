@@ -1,1 +1,6 @@
-node_modules/*
+node_modules
+compile_flags.txt
+*.node
+*.a
+*.o
+dist

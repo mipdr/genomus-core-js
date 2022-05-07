@@ -1,11 +1,12 @@
 {
   'targets': [
     {
-      'target_name': 'genomus-core-native',
+      'target_name': 'genomus_core_native',
       'sources': [ 
-        'genomus-core/sample.cc',
-        'genomus-core/library/*',
-        'genomus-core/common/error_handling/*'
+        'src/genomus_core_native.cpp'
+        # 'genomus-core/sample.cc',
+        # 'genomus-core/library/*',
+        # 'genomus-core/common/error_handling/*'
       ],
       'include_dirs': ["<!@(node -p \"require('node-addon-api').include\")"],
       'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],

@@ -1,0 +1,1 @@
+cmd_Release/genomus_core_js.node := ln -f "Release/obj.target/genomus_core_js.node" "Release/genomus_core_js.node" 2>/dev/null || (rm -rf "Release/genomus_core_js.node" && cp -af "Release/obj.target/genomus_core_js.node" "Release/genomus_core_js.node")

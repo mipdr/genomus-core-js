@@ -1,4 +1,10 @@
-const addon = require('../build/Release/genomus-core-native');
+const addon = require('../build/Release/genomus_core_native');
 
-export = addon.GenomusCore
+interface IGenomusCoreNative {
+    message: string;
+}
+
+const library: IGenomusCoreNative = addon;
+
+export = library;
 

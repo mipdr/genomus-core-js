@@ -1,0 +1,1 @@
+cmd_Debug/obj.target/genomus_core_native.node := g++ -o Debug/obj.target/genomus_core_native.node -shared -pthread -rdynamic -m64  -Wl,-soname=genomus_core_native.node -Wl,--start-group Debug/obj.target/genomus_core_native/src/genomus_napi.o Debug/obj.target/node_modules/node-addon-api/src/nothing.a -Wl,--end-group 

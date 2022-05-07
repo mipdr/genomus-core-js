@@ -37,17 +37,17 @@ CFLAGS_C_Debug :=
 # Flags passed to only C++ files.
 CFLAGS_CC_Debug := \
 	-fno-rtti \
-	-std=gnu++17
+	-std=gnu++1y
 
 INCS_Debug := \
-	-I/home/miguel/.cache/node-gyp/18.0.0/include/node \
-	-I/home/miguel/.cache/node-gyp/18.0.0/src \
-	-I/home/miguel/.cache/node-gyp/18.0.0/deps/openssl/config \
-	-I/home/miguel/.cache/node-gyp/18.0.0/deps/openssl/openssl/include \
-	-I/home/miguel/.cache/node-gyp/18.0.0/deps/uv/include \
-	-I/home/miguel/.cache/node-gyp/18.0.0/deps/zlib \
-	-I/home/miguel/.cache/node-gyp/18.0.0/deps/v8/include \
-	-I/home/miguel/genomus-core-js/node_modules/node-addon-api
+	-I/home/miguel/.cache/node-gyp/16.0.0/include/node \
+	-I/home/miguel/.cache/node-gyp/16.0.0/src \
+	-I/home/miguel/.cache/node-gyp/16.0.0/deps/openssl/config \
+	-I/home/miguel/.cache/node-gyp/16.0.0/deps/openssl/openssl/include \
+	-I/home/miguel/.cache/node-gyp/16.0.0/deps/uv/include \
+	-I/home/miguel/.cache/node-gyp/16.0.0/deps/zlib \
+	-I/home/miguel/.cache/node-gyp/16.0.0/deps/v8/include \
+	-I/home/miguel/TFG/genomus-core-js/node_modules/node-addon-api
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=genomus-core-native' \
@@ -81,20 +81,20 @@ CFLAGS_C_Release :=
 # Flags passed to only C++ files.
 CFLAGS_CC_Release := \
 	-fno-rtti \
-	-std=gnu++17
+	-std=gnu++1y
 
 INCS_Release := \
-	-I/home/miguel/.cache/node-gyp/18.0.0/include/node \
-	-I/home/miguel/.cache/node-gyp/18.0.0/src \
-	-I/home/miguel/.cache/node-gyp/18.0.0/deps/openssl/config \
-	-I/home/miguel/.cache/node-gyp/18.0.0/deps/openssl/openssl/include \
-	-I/home/miguel/.cache/node-gyp/18.0.0/deps/uv/include \
-	-I/home/miguel/.cache/node-gyp/18.0.0/deps/zlib \
-	-I/home/miguel/.cache/node-gyp/18.0.0/deps/v8/include \
-	-I/home/miguel/genomus-core-js/node_modules/node-addon-api
+	-I/home/miguel/.cache/node-gyp/16.0.0/include/node \
+	-I/home/miguel/.cache/node-gyp/16.0.0/src \
+	-I/home/miguel/.cache/node-gyp/16.0.0/deps/openssl/config \
+	-I/home/miguel/.cache/node-gyp/16.0.0/deps/openssl/openssl/include \
+	-I/home/miguel/.cache/node-gyp/16.0.0/deps/uv/include \
+	-I/home/miguel/.cache/node-gyp/16.0.0/deps/zlib \
+	-I/home/miguel/.cache/node-gyp/16.0.0/deps/v8/include \
+	-I/home/miguel/TFG/genomus-core-js/node_modules/node-addon-api
 
 OBJS := \
-	$(obj).target/$(TARGET)/src/genomus_core.o
+	$(obj).target/$(TARGET)/src/genomus_napi.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)
@@ -110,15 +110,15 @@ $(OBJS): GYP_CXXFLAGS := $(DEFS_$(BUILDTYPE)) $(INCS_$(BUILDTYPE))  $(CFLAGS_$(B
 
 # Suffix rules, putting all outputs into $(obj).
 
-$(obj).$(TOOLSET)/$(TARGET)/%.o: $(srcdir)/%.cc FORCE_DO_CMD
+$(obj).$(TOOLSET)/$(TARGET)/%.o: $(srcdir)/%.cpp FORCE_DO_CMD
 	@$(call do_cmd,cxx,1)
 
 # Try building from generated source, too.
 
-$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj).$(TOOLSET)/%.cc FORCE_DO_CMD
+$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj).$(TOOLSET)/%.cpp FORCE_DO_CMD
 	@$(call do_cmd,cxx,1)
 
-$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.cc FORCE_DO_CMD
+$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.cpp FORCE_DO_CMD
 	@$(call do_cmd,cxx,1)
 
 # End of this set of suffix rules

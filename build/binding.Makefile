@@ -3,4 +3,4 @@
 export builddir_name ?= ./build/.
 .PHONY: all
 all:
-	$(MAKE) genomus-core-native
+	$(MAKE) genomus_core_native
