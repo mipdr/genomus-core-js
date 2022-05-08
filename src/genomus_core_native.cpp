@@ -20,12 +20,10 @@ float getOneFloatParameter(napi_env env, napi_callback_info info) {
     STATUS = napi_get_cb_info(env, info, &argc, argv, NULL, NULL);
 
     if (STATUS != napi_ok) throw 1;
-    log(argv[0]);
 
     STATUS = napi_get_value_double(env, argv[0], &result);
 
     if (STATUS != napi_ok) throw 1;
-    log(result);
 
     return result;
 }
@@ -33,7 +31,7 @@ float getOneFloatParameter(napi_env env, napi_callback_info info) {
 map<std::string, napi_callback> ParameterMapperWrappers({
     { "NoteValueF", [](napi_env env, napi_callback_info info) -> napi_value { 
         const double parameter = getOneFloatParameter(env, info);
-        return Napi::Number::New(env, NoteValueF << parameter); 
+        return Napi::Number::New(env, (double)(NoteValueF << parameter)); 
     } }
 });
 

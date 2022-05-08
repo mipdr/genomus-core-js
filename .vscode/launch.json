@@ -7,7 +7,7 @@
             "request": "launch",
             "program": "/home/miguel/.nvm/versions/node/v16.0.0/bin/node",
             "args": ["${workspaceFolder}/test/test_binding.js"],
-            "stopAtEntry": true,
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [{"name":"NODE_ENV", "value":"dev" }],
             "externalConsole": false,
