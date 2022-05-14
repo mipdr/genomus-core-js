@@ -1,1 +1,1 @@
-alias build="node-gyp clean; node-gyp configure; node-gyp build --debug"
+alias build="node-gyp clean; node-gyp configure; node-gyp build --debug; npm run pretest"
