@@ -2,8 +2,10 @@
 #include <iostream>
 #include <stdexcept>
 #include "genomus-core/common/error_handling/error_handling.hpp"
+#include "genomus-core/library/encoded_phenotype.hpp"
 #include "genomus-core/library/features.hpp"
 #include "genomus-core/library/parameter_mapping.hpp"
+#include "genomus-core/library/species.hpp"
 #include "genomus_core_native.hpp"
 #include "node_api_types.h"
 
@@ -98,12 +100,24 @@ void registerParameterMapper(ParameterMapper& feature, napi_env *env, napi_value
 
 void registerGenomusFeature(GenomusFeature& feature, napi_env *env, napi_value *exports, napi_property_descriptor* pd) {
     switch(feature.getType()) {
-        case parameterMapper:
+        case parameter_mapper:
             registerParameterMapper((ParameterMapper &)feature, env, exports, pd);
+            break;
+        default:
+            throw runtime_error("Invalid enum value");
     }
 };
 
+void test() {
+    auto e = Event({ .parameters = {
+        Parameter({duration, 1.0}),
+        Parameter({pitch, 0.5}),
+        Parameter({intensity, 0.7})
+    } }, CURRENT_SPECIES);
+}
+
 napi_value Init(napi_env env, napi_value exports) {
+    // test();
     napi_property_descriptor long_life_pd;
 
     for (auto feature_p : genomusFeatures) {
