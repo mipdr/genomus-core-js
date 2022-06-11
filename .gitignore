@@ -6,3 +6,4 @@ compile_flags.txt
 dist
 build
 .gitmodules
+src/wrapper_objects.cpp

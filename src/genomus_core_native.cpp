@@ -1,11 +1,6 @@
 #include <napi.h>
 #include <iostream>
 #include <stdexcept>
-#include "genomus-core/common/error_handling/error_handling.hpp"
-#include "genomus-core/library/encoded_phenotype.hpp"
-#include "genomus-core/library/features.hpp"
-#include "genomus-core/library/parameter_mapping.hpp"
-#include "genomus-core/library/species.hpp"
 #include "genomus_core_native.hpp"
 #include "node_api_types.h"
 

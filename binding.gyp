@@ -11,6 +11,14 @@
         'src/genomus-core/library/decoded_genotype.cpp',
         'src/genomus-core/common/error_handling/error_handling.cpp'
       ],
+      'actions': [
+        {
+          'action_name': 'precompilation_magic',
+          'inputs': ['src/precompilation.py'],
+          'outputs': [''],
+          'action': ['python3', 'src/precompilation.py'],
+        },
+      ],
       'include_dirs': ["<!@(node -p \"require('node-addon-api').include\")"],
       'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],
       'cflags!': [ '-fno-exceptions' ],
