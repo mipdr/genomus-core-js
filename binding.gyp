@@ -4,10 +4,14 @@
       'target_name': 'genomus_core_native',
       'sources': [ 
         'src/genomus_core_native.cpp',
-        'src/genomus-core/library/genomus-core.cpp',
-        'src/genomus-core/library/parameter_mapping.cpp',
+        'src/genomus-core/library/decoded_genotype.cpp',
+        'src/genomus-core/library/encoded_genotype.cpp',
+        'src/genomus-core/library/encoded_phenotype.cpp',
+        'src/genomus-core/library/utils.cpp',
+        'src/genomus-core/library/parser.cpp',
+        'src/genomus-core/library/species.cpp',
         'src/genomus-core/library/features.cpp',
-        'src/genomus-core/common/error_handling/error_handling.cpp'
+        'src/genomus-core/library/function_library.cpp',
       ],
       'include_dirs': ["<!@(node -p \"require('node-addon-api').include\")"],
       'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],
