@@ -2,7 +2,8 @@
   'targets': [
     {
       'target_name': 'genomus_core_native',
-      'sources': [ 
+      'sources': [
+        'src/genomus-core/library/genomus-core.cpp', 
         'src/genomus_core_native.cpp',
         'src/genomus-core/library/decoded_genotype.cpp',
         'src/genomus-core/library/encoded_genotype.cpp',

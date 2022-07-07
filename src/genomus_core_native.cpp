@@ -82,7 +82,7 @@ void registerFunction(function<void(string)> f, napi_env *env, napi_value* expor
 napi_value Init(napi_env env, napi_value exports) {
     napi_property_descriptor long_life_pd;
 
-    init_available_functions();
+    init_genomus();
 
     registerFunction(parseString, &env, &exports, &long_life_pd);
 
