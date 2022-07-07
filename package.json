@@ -9,8 +9,8 @@
         "build": "node-gyp build"
     },
     "gypfile": true,
-    "name": "genomus-core",
-    "version": "1.0.0",
+    "name": "genomus-core-js",
+    "version": "0.1.0",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/mipdr/genomus-core-js.git"
