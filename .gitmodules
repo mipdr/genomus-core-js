@@ -1,4 +1,4 @@
 [submodule "src/genomus-core"]
 	path = src/genomus-core
 	url = git@github.com:mipdr/genomus-core.git
-	branch = develop
+	branch = master

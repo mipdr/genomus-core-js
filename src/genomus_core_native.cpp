@@ -1,13 +1,16 @@
 #include <napi.h>
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
-#include "genomus-core/common/error_handling/error_handling.hpp"
-#include "genomus-core/library/features.hpp"
-#include "genomus-core/library/parameter_mapping.hpp"
+#include "genomus-core/library/decoded_genotype.hpp"
+#include "genomus-core/library/genomus-core.hpp"
+#include "genomus-core/library/parser.hpp"
 #include "genomus_core_native.hpp"
+#include "node_api.h"
 #include "node_api_types.h"
 
 using namespace Napi;
+using namespace std;
 
 static napi_status STATUS;
 
@@ -33,59 +36,39 @@ float getOneFloatParameter(napi_env env, napi_callback_info info) {
     return result;
 }
 
-// This object is just a workaround untill we find a way to dynamically declare callbacks at runtime
-map<std::string, napi_callback> ParameterMapperWrappers({
-    { "NoteValueF", [](napi_env env, napi_callback_info info) -> napi_value { 
-        const double parameter = getOneFloatParameter(env, info);
-        return Napi::Number::New(env, (double)(NoteValueF << parameter)); 
-    }},
-    { "ParamF", [](napi_env env, napi_callback_info info) -> napi_value { 
-        const double parameter = getOneFloatParameter(env, info);
-        return Napi::Number::New(env, (double)(ParamF << parameter)); 
-    }},
-    { "DurationF", [](napi_env env, napi_callback_info info) -> napi_value { 
-        const double parameter = getOneFloatParameter(env, info);
-        return Napi::Number::New(env, (double)(DurationF << parameter)); 
-    }},
-    { "MidiPitchF", [](napi_env env, napi_callback_info info) -> napi_value { 
-        const double parameter = getOneFloatParameter(env, info);
-        return Napi::Number::New(env, (double)(MidiPitchF << parameter)); 
-    }},
-    { "FrequencyF", [](napi_env env, napi_callback_info info) -> napi_value { 
-        const double parameter = getOneFloatParameter(env, info);
-        return Napi::Number::New(env, (double)(FrequencyF << parameter)); 
-    }},
-    { "ArticulationF", [](napi_env env, napi_callback_info info) -> napi_value { 
-        const double parameter = getOneFloatParameter(env, info);
-        return Napi::Number::New(env, (double)(ArticulationF << parameter)); 
-    }},
-    { "IntensityF", [](napi_env env, napi_callback_info info) -> napi_value { 
-        const double parameter = getOneFloatParameter(env, info);
-        return Napi::Number::New(env, (double)(IntensityF << parameter)); 
-    }},
-    { "GoldenintegerF", [](napi_env env, napi_callback_info info) -> napi_value { 
-        const double parameter = getOneFloatParameter(env, info);
-        double return_value;
+string getOneStringParameter(napi_env env, napi_callback_info info) {
+    size_t argc = 1;
+    napi_value argv[1];
+    static const size_t buff_size = 1024;
+    char buffer[buff_size - 1];
+    char result_buffer[buff_size] = {0};
+    size_t result_size;
 
-        // TODO (GM-19) Generalize error handling
-        try {
-            return_value = GoldenintegerF << parameter;
-        } catch (runtime_error& e) {
-            napi_throw(env, Napi::String::New(env, e.what()));
-        }
-        return Napi::Number::New(env, (double)(return_value)); 
-    }},
-    { "QuantizedF", [](napi_env env, napi_callback_info info) -> napi_value { 
-        const double parameter = getOneFloatParameter(env, info);
-        return Napi::Number::New(env, (double)(QuantizedF << parameter)); 
-    }},
-});
+    
+    STATUS = napi_get_cb_info(env, info, &argc, argv, NULL, NULL);
 
-void registerParameterMapper(ParameterMapper& feature, napi_env *env, napi_value* exports, napi_property_descriptor* pd) {
-    napi_callback cb = ParameterMapperWrappers.find(feature.getName()) -> second;
+    if (STATUS != napi_ok) throw 1;
+
+    STATUS = napi_get_value_string_utf8(env, argv[0], buffer, buff_size, &result_size);
+
+    if (STATUS != napi_ok) throw 1;
+
+    memcpy(result_buffer, buffer, result_size * sizeof(char));
+
+    return string(result_buffer);
+}
+
+void registerFunction(function<void(string)> f, napi_env *env, napi_value* exports, napi_property_descriptor* pd) {
+    napi_callback cb = [](napi_env env, napi_callback_info info) -> napi_value { 
+        const string parameter = getOneStringParameter(env, info);
+        stringstream ss;
+        ss << " - Decoded Genotype: " << parseString(parameter).toString() << endl;
+        ss << " - Encoded Phenotype: " << parseString(parameter).evaluate().toString() << endl;
+        return Napi::String::New(env, ss.str()); 
+    };
 
     pd -> utf8name = NULL;
-    pd -> name = Napi::String::New(*env, feature.getName()); 
+    pd -> name = Napi::String::New(*env, "interpreter"); 
     pd -> method = cb,
     pd -> getter = NULL;
     pd -> setter = NULL;
@@ -96,19 +79,12 @@ void registerParameterMapper(ParameterMapper& feature, napi_env *env, napi_value
     STATUS = napi_define_properties(*env, *exports, 1, pd);
 }
 
-void registerGenomusFeature(GenomusFeature& feature, napi_env *env, napi_value *exports, napi_property_descriptor* pd) {
-    switch(feature.getType()) {
-        case parameterMapper:
-            registerParameterMapper((ParameterMapper &)feature, env, exports, pd);
-    }
-};
-
 napi_value Init(napi_env env, napi_value exports) {
     napi_property_descriptor long_life_pd;
 
-    for (auto feature_p : genomusFeatures) {
-        registerGenomusFeature(*feature_p, &env, &exports, &long_life_pd);
-    }
+    init_genomus();
+
+    registerFunction(parseString, &env, &exports, &long_life_pd);
 
     return exports;
 }
