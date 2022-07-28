@@ -1,4 +1,4 @@
-const addon = require('../build/Debug/genomus_core_native');
+const addon = require('../build/Release/genomus_core_native');
 
 interface IGenomusCoreNative {
     interpreter: (entry: string) => string;
